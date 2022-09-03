@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-location";
+import clsx from "clsx";
 import { useAtom } from "jotai";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
@@ -22,7 +23,7 @@ export default function Register() {
   const registerMutation = useMutation((data) => registerApi(data), {
     onSuccess: (data) => {
       setUser(data);
-      navigate({ to: "/" });
+      navigate({ to: "/", register: true });
     },
   });
 

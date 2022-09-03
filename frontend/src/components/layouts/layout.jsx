@@ -1,4 +1,5 @@
 import { Outlet } from "@tanstack/react-location";
+
 import Footer from "/src/components/layouts/footer";
 import Header from "/src/components/layouts/header";
 

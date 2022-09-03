@@ -8,7 +8,6 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const cookieParser = require("cookie-parser");
 
 // routers
 const userRouter = require("./domains/user/user.router");
@@ -32,7 +31,6 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
-app.use(cookieParser());
 
 // routers
 const prefix = "/api/v1";

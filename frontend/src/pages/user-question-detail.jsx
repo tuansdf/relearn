@@ -1,8 +1,10 @@
 import { useMatch } from "@tanstack/react-location";
 import { useQuery } from "react-query";
-import CommentList from "/src/components/comment/comment-list";
+
+import CommentBoxList from "/src/components/comment/comment-box-list";
 import Error from "/src/components/shared/error";
 import Loading from "/src/components/shared/loading";
+
 import { QueryKeys } from "/src/constants/query-keys";
 import { getCommentsByQuestionApi } from "/src/helpers/fetchers";
 
@@ -26,7 +28,7 @@ export default function UserQuestionDetail() {
       ) : commentsQuery.isError ? (
         <Error text={commentsQuery.error.response.data.message} />
       ) : (
-        <CommentList comments={commentsQuery.data} />
+        <CommentBoxList comments={commentsQuery.data} />
       )}
     </div>
   );

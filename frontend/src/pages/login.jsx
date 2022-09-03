@@ -23,7 +23,7 @@ export default function Login() {
   const loginMutation = useMutation((data) => loginApi(data), {
     onSuccess: (data) => {
       setUser(data);
-      navigate({ to: "/" });
+      navigate({ to: "/", replace: true });
     },
   });
 

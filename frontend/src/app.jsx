@@ -1,8 +1,11 @@
 import { ReactLocation, Router } from "@tanstack/react-location";
 import { Provider } from "jotai";
 import { QueryClient, QueryClientProvider } from "react-query";
+import CheckLogin from "/src/components/authentication/check-login";
 
+import CheckLogout from "/src/components/authentication/check-logout";
 import Layout from "/src/components/layouts/layout";
+import Error from "/src/components/shared/error";
 import Home from "/src/pages/home";
 import Login from "/src/pages/login";
 import Register from "/src/pages/register";
@@ -12,8 +15,8 @@ import UserInfo from "/src/pages/user-info";
 import UserLessonDetail from "/src/pages/user-lesson-detail";
 import UserQuestionDetail from "/src/pages/user-question-detail";
 
-const location = new ReactLocation();
 const queryClient = new QueryClient();
+const location = new ReactLocation();
 
 const routes = [
   {
@@ -24,16 +27,24 @@ const routes = [
         element: <Home />,
       },
       {
-        path: "/user",
+        path: "/user/",
         element: <UserInfo />,
       },
       {
-        path: "/login",
-        element: <Login />,
+        path: "/login/",
+        element: (
+          <CheckLogout>
+            <Login />
+          </CheckLogout>
+        ),
       },
       {
-        path: "/register",
-        element: <Register />,
+        path: "/register/",
+        element: (
+          <CheckLogout>
+            <Register />
+          </CheckLogout>
+        ),
       },
       {
         path: "/courses/:courseId",
@@ -43,18 +54,26 @@ const routes = [
             element: <UserCourseDetail />,
           },
           {
-            path: "/test",
+            path: "/test/",
             element: <UserCourseTest />,
           },
         ],
       },
       {
-        path: "/lessons/:lessonId",
-        element: <UserLessonDetail />,
+        path: "/lessons/:lessonId/",
+        element: (
+          <CheckLogin>
+            <UserLessonDetail />
+          </CheckLogin>
+        ),
       },
       {
-        path: "/questions/:questionId",
-        element: <UserQuestionDetail />,
+        path: "/questions/:questionId/",
+        element: (
+          <CheckLogin>
+            <UserQuestionDetail />
+          </CheckLogin>
+        ),
       },
       {
         path: "/admin",
@@ -63,15 +82,18 @@ const routes = [
             path: "/",
           },
           {
-            path: "/courses/:courseId",
+            path: "/courses/:courseId/",
           },
           {
-            path: "/lessons/:lessonId",
+            path: "/lessons/:lessonId/",
           },
           {
-            path: "/questions/:questionId",
+            path: "/questions/:questionId/",
           },
         ],
+      },
+      {
+        element: <Error text="Invalid route" />,
       },
     ],
   },

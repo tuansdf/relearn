@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
+
 import Question from "/src/components/question/question";
 import Error from "/src/components/shared/error";
 import Info from "/src/components/shared/info";
@@ -46,6 +47,11 @@ export default function QuestionList({ questions }) {
   return questions.length > 0 ? (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 pl-4">
+        {/* error */}
+        {Object.keys(errors).length > 0 && (
+          <Error text="You must answer all questions" />
+        )}
+
         {/* list */}
         {questions.map((question, index) => (
           <Question
@@ -58,11 +64,6 @@ export default function QuestionList({ questions }) {
 
         {/* submit */}
         <button className="btn btn-primary">Submit</button>
-
-        {/* error */}
-        {Object.keys(errors).length > 0 && (
-          <Error text="You have to select all the questions" />
-        )}
       </form>
 
       {/* modal */}

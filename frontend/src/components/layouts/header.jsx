@@ -26,7 +26,7 @@ export default function Header() {
 
   return (
     <nav className="bg-base-300">
-      <div className="container navbar">
+      <div className="container navbar flex-col sm:flex-row">
         {/* start */}
         <div>
           <Link to="/" className="btn btn-ghost">
@@ -43,7 +43,7 @@ export default function Header() {
           {user.role === "admin" && (
             <Link to="/admin" className="btn btn-ghost gap-1">
               <AdjustmentsVerticalIcon className="h-5 w-5" />
-              Dashboard
+              Admin Dashboard
             </Link>
           )}
         </div>
@@ -67,7 +67,7 @@ export default function Header() {
                 </li>
                 <li onClick={logout}>
                   <span>
-                    <ArrowRightOnRectangleIcon className="h-5 w-5" /> Logout
+                    <ArrowRightOnRectangleIcon className="h-5 w-5" /> Log out
                   </span>
                 </li>
               </ul>

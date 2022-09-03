@@ -1,4 +1,5 @@
 import { useAtom } from "jotai";
+
 import { userAtom } from "/src/stores/auth.store";
 
 export default function UserInfo() {

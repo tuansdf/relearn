@@ -1,7 +1,7 @@
 import { Link, useMatch } from "@tanstack/react-location";
 import { useQuery } from "react-query";
 
-import LessonList from "/src/components/lesson/lesson-list";
+import LessonCardList from "/src/components/lesson/lesson-card-list";
 import Error from "/src/components/shared/error";
 import Loading from "/src/components/shared/loading";
 
@@ -54,7 +54,7 @@ export default function UserCourseDetail() {
         ) : lessonsQuery.isError ? (
           <Error text={lessonsQuery.error.response.data.message} />
         ) : (
-          <LessonList lessons={lessonsQuery.data} />
+          <LessonCardList lessons={lessonsQuery.data} />
         )}
       </div>
     </div>
