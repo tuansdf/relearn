@@ -1,4 +1,11 @@
-import { CpuChipIcon } from "@heroicons/react/24/outline";
+import {
+  AdjustmentsVerticalIcon,
+  ArrowRightOnRectangleIcon,
+  AtSymbolIcon,
+  CpuChipIcon,
+  HomeIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "@tanstack/react-location";
 import { useAtom } from "jotai";
 import { RESET } from "jotai/utils";
@@ -20,40 +27,58 @@ export default function Header() {
   return (
     <nav className="bg-base-300">
       <div className="container navbar">
-        <div className="navbar-start">
-          <Link className="btn btn-ghost">
+        {/* start */}
+        <div>
+          <Link to="/" className="btn btn-ghost">
             <CpuChipIcon className="h-8 w-8" />
-            <div to="/" className="text-xl font-bold">
+            <span className="text-xl font-bold">
               <span>re</span>
               <span className="text-primary">learn</span>
-            </div>
+            </span>
           </Link>
-          <Link to="/" className="btn btn-ghost">
+          <Link to="/" className="btn btn-ghost gap-1">
+            <HomeIcon className="h-5 w-5" />
             Home
           </Link>
-          <Link to="/user" className="btn btn-ghost">
-            User
-          </Link>
           {user.role === "admin" && (
-            <Link to="admin" className="btn btn-ghost">
-              Admin
+            <Link to="/admin" className="btn btn-ghost gap-1">
+              <AdjustmentsVerticalIcon className="h-5 w-5" />
+              Dashboard
             </Link>
           )}
         </div>
-        <div className="navbar-end space-x-4">
+
+        {/* end */}
+        <div className="ml-auto">
           {Object.keys(user).length > 0 ? (
-            <>
-              <span>{user.username}</span>
-              <button className="btn btn-primary" onClick={logout}>
-                Log out
-              </button>
-            </>
+            <div className="dropdown-end dropdown">
+              <label tabIndex={0} className="btn btn-ghost">
+                <AtSymbolIcon className="h-5 w-5" />
+                {user.username}
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-200 p-2 shadow-lg"
+              >
+                <li>
+                  <Link to="/user">
+                    <UserIcon className="h-5 w-5" /> Profile
+                  </Link>
+                </li>
+                <li onClick={logout}>
+                  <span>
+                    <ArrowRightOnRectangleIcon className="h-5 w-5" /> Logout
+                  </span>
+                </li>
+              </ul>
+            </div>
           ) : (
             <Link className="btn btn-primary" to="/login">
               Log in
             </Link>
           )}
         </div>
+        {/* end navbar-end */}
       </div>
     </nav>
   );

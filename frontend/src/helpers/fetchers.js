@@ -53,3 +53,7 @@ export const getCommentsApi = async () => {
 export const getCommentsByQuestionApi = async (questionId) => {
   return (await instance.get(`/questions/${questionId}/comments`)).data;
 };
+
+export const postCommentInQuestionApi = async (questionId, data) => {
+  return (await instance.post(`/questions/${questionId}/comments`, data)).data;
+};

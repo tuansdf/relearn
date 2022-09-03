@@ -8,6 +8,7 @@ import Login from "/src/pages/login";
 import Register from "/src/pages/register";
 import UserCourseDetail from "/src/pages/user-course-detail";
 import UserCourseTest from "/src/pages/user-course-test";
+import UserInfo from "/src/pages/user-info";
 import UserLessonDetail from "/src/pages/user-lesson-detail";
 import UserQuestionDetail from "/src/pages/user-question-detail";
 
@@ -21,6 +22,10 @@ const routes = [
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/user",
+        element: <UserInfo />,
       },
       {
         path: "/login",
