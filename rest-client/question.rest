@@ -1,0 +1,39 @@
+GET {{baseUrl}}/questions HTTP/1.1
+
+###
+
+GET {{baseUrl}}/questions/{{questionId}} HTTP/1.1
+
+###
+
+GET {{baseUrl}}/questions/{{questionId}}/comments HTTP/1.1
+
+###
+
+POST {{baseUrl}}/questions HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "text": "question {{lessonId}}",
+    "description": "description {{lessonId}}",
+    "answers": [
+        {
+            "text": "answer1 {{lessonId}}",
+            "isCorrect": true
+        },
+        {
+            "text": "answer2 {{lessonId}}",
+            "isCorrect": false
+        },
+        {
+            "text": "answer3 {{lessonId}}",
+            "isCorrect": false
+        },
+        {
+            "text": "answer4 {{lessonId}}",
+            "isCorrect": false
+        }
+    ],
+    "lessonId": "{{lessonId}}"
+}

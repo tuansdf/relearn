@@ -1,0 +1,5 @@
+GET {{baseUrl}}/users HTTP/1.1
+
+###
+
+GET {{baseUrl}}/users/{{userId}} HTTP/1.1

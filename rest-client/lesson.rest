@@ -1,0 +1,21 @@
+GET {{baseUrl}}/lessons HTTP/1.1
+
+###
+
+GET {{baseUrl}}/lessons/{{lessonId}} HTTP/1.1
+
+###
+
+GET {{baseUrl}}/lessons/{{lessonId}}/questions HTTP/1.1
+
+###
+
+POST {{baseUrl}}/lessons HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "title": "title {{courseId}}",
+    "description": "description {{courseId}}",
+    "courseId": "{{courseId}}"
+}
