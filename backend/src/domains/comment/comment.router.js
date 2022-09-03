@@ -14,8 +14,4 @@ router.get("/:commentId", async (req, res) => {
   res.json(await commentService.findOne({ commentId }));
 });
 
-router.post("/", async (req, res) => {
-  res.json(await commentService.create(req.body));
-});
-
 module.exports = router;

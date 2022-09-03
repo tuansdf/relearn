@@ -19,8 +19,10 @@ router.get("/:questionId/comments", async (req, res) => {
   res.json(await commentService.findAllByQuestion({ questionId }));
 });
 
-router.post("/", async (req, res) => {
-  res.json(await questionService.create(req.body));
+router.post("/:questionId/comments", async (req, res) => {
+  const { questionId } = req.params;
+
+  res.json(await commentService.create({ ...req.body, questionId }));
 });
 
 module.exports = router;

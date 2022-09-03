@@ -6,14 +6,6 @@ GET {{baseUrl}}/courses/{{courseId}} HTTP/1.1
 
 ###
 
-GET {{baseUrl}}/courses/{{courseId}}/lessons HTTP/1.1
-
-###
-
-GET {{baseUrl}}/courses/{{courseId}}/questions HTTP/1.1
-
-###
-
 POST {{baseUrl}}/courses HTTP/1.1
 Authorization: Bearer {{token}}
 Content-Type: application/json

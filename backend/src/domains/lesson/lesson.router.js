@@ -19,8 +19,10 @@ router.get("/:lessonId/questions", async (req, res) => {
   res.json(await questionService.findAllByLesson({ lessonId }));
 });
 
-router.post("/", async (req, res) => {
-  res.json(await lessonService.create(req.body));
+router.post("/:lessonId/questions", async (req, res) => {
+  const { lessonId } = req.params;
+
+  res.json(await questionService.create({ ...req.body, lessonId }));
 });
 
 module.exports = router;

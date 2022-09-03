@@ -6,11 +6,15 @@ GET {{baseUrl}}/questions/{{questionId}} HTTP/1.1
 
 ###
 
-GET {{baseUrl}}/questions/{{questionId}}/comments HTTP/1.1
+GET {{baseUrl}}/courses/{{courseId}}/questions HTTP/1.1
 
 ###
 
-POST {{baseUrl}}/questions HTTP/1.1
+GET {{baseUrl}}/lessons/{{lessonId}}/questions HTTP/1.1
+
+###
+
+POST {{baseUrl}}/lessons/{{lessonId}}/questions HTTP/1.1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
@@ -34,6 +38,5 @@ Content-Type: application/json
             "text": "answer4 {{lessonId}}",
             "isCorrect": false
         }
-    ],
-    "lessonId": "{{lessonId}}"
+    ]
 }

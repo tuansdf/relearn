@@ -6,12 +6,15 @@ GET {{baseUrl}}/comments/{{commentId}} HTTP/1.1
 
 ###
 
-POST {{baseUrl}}/comments HTTP/1.1
+GET {{baseUrl}}/questions/{{questionId}}/comments HTTP/1.1
+
+###
+
+POST {{baseUrl}}/questions/{{questionId}}/comments HTTP/1.1
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
     "text": "comment {{questionId}} {{userId}}",
-    "authorId": "{{userId}}",
-    "questionId": "{{questionId}}"
+    "authorId": "{{userId}}"
 }

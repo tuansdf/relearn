@@ -30,4 +30,10 @@ router.post("/", async (req, res) => {
   res.json(await courseService.create(req.body));
 });
 
+router.post("/:courseId/lessons", async (req, res) => {
+  const { courseId } = req.params;
+
+  res.json(await lessonService.create({ ...req.body, courseId }));
+});
+
 module.exports = router;

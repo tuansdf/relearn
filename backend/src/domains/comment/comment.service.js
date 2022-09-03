@@ -20,7 +20,9 @@ const findOne = async ({ commentId }) => {
 };
 
 const findAllByQuestion = async ({ questionId }) => {
-  const comments = await Comment.find({ question: questionId });
+  const comments = await Comment.find({ question: questionId }).sort(
+    "-updatedAt"
+  );
 
   return comments;
 };
