@@ -26,14 +26,20 @@ router.get("/:courseId/questions", async (req, res) => {
   res.json(await questionService.findAllByCourse({ courseId }));
 });
 
-router.post("/", async (req, res) => {
-  res.json(await courseService.create(req.body));
-});
-
 router.post("/:courseId/lessons", async (req, res) => {
   const { courseId } = req.params;
 
   res.json(await lessonService.create({ ...req.body, courseId }));
+});
+
+router.post("/", async (req, res) => {
+  res.json(await courseService.create(req.body));
+});
+
+router.patch("/:courseId", async (req, res) => {
+  const { courseId } = req.params;
+
+  res.json(await courseService.update({ ...req.body, courseId }));
 });
 
 module.exports = router;
