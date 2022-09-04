@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      aspectRatio: {
+        "2/1": "2/1",
+      },
+    },
     container: {
       center: true,
       padding: "1rem",

@@ -11,5 +11,5 @@
 }
 
 .card-body {
-  @apply pt-6;
+  @apply p-6;
 }

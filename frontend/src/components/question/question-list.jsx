@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -39,7 +40,6 @@ export default function QuestionList({ questions }) {
   const openModal = () => {
     setIsModal(true);
   };
-
   const closeModal = () => {
     setIsModal(false);
   };
@@ -68,14 +68,7 @@ export default function QuestionList({ questions }) {
 
       {/* modal */}
       <div>
-        <input
-          type="checkbox"
-          id="finish-modal"
-          className="modal-toggle"
-          checked={isModal}
-          onChange={() => {}}
-        />
-        <div className="modal">
+        <div className={clsx("modal mt-0", { "modal-open": isModal })}>
           <div className="modal-box space-y-4">
             <h3 className="text-lg font-bold uppercase">Test result</h3>
             <p>
@@ -86,13 +79,9 @@ export default function QuestionList({ questions }) {
               You got <span className="font-bold">{mark}</span>
             </p>
             <div className="modal-action">
-              <label
-                htmlFor="finish-modal"
-                className="btn btn-primary"
-                onClick={closeModal}
-              >
+              <button onClick={closeModal} className="btn btn-primary">
                 OK
-              </label>
+              </button>
             </div>
           </div>
         </div>

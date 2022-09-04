@@ -12,7 +12,7 @@ export default function Home() {
   const coursesQuery = useQuery([QueryKeys.COURSES], getCoursesApi);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 lg:space-y-8">
       <h2 className="text-2xl font-bold lg:text-3xl">Courses</h2>
       {coursesQuery.isLoading ? (
         <Loading />

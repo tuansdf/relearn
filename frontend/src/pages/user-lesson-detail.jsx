@@ -21,7 +21,7 @@ export default function UserLessonDetail() {
   );
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 lg:space-y-8">
       <h2 className="text-2xl font-bold lg:text-3xl">Questions</h2>
       {questionsQuery.isLoading ? (
         <Loading />

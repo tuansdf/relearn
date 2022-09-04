@@ -1,11 +1,13 @@
 import { ReactLocation, Router } from "@tanstack/react-location";
 import { Provider } from "jotai";
 import { QueryClient, QueryClientProvider } from "react-query";
-import CheckLogin from "/src/components/authentication/check-login";
 
+import CheckLogin from "/src/components/authentication/check-login";
 import CheckLogout from "/src/components/authentication/check-logout";
 import Layout from "/src/components/layouts/layout";
 import Error from "/src/components/shared/error";
+import AdminCourses from "/src/pages/admin-courses";
+import AdminLessons from "/src/pages/admin-lessons";
 import Home from "/src/pages/home";
 import Login from "/src/pages/login";
 import Register from "/src/pages/register";
@@ -79,16 +81,21 @@ const routes = [
         path: "/admin",
         children: [
           {
-            path: "/",
+            path: "/courses",
+            children: [
+              {
+                path: "/",
+                element: <AdminCourses />,
+              },
+              {
+                path: "/:courseId/lessons",
+                element: <AdminLessons />,
+              },
+            ],
           },
-          {
-            path: "/courses/:courseId/",
-          },
+
           {
             path: "/lessons/:lessonId/",
-          },
-          {
-            path: "/questions/:questionId/",
           },
         ],
       },

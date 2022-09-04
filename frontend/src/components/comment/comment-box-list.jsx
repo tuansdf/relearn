@@ -28,17 +28,18 @@ export default function CommentBoxList({ comments }) {
   const commentMutation = useMutation(
     (data) => postCommentInQuestionApi(questionId, data),
     {
-      onSuccess: () =>
+      onSuccess: () => {
         queryClient.invalidateQueries([
           QueryKeys.COMMENTS_BY_QUESTION,
           questionId,
-        ]),
+        ]);
+        reset();
+      },
     }
   );
 
   const onSubmit = (data) => {
     commentMutation.mutate({ ...data, authorId: user._id });
-    reset();
   };
 
   return (

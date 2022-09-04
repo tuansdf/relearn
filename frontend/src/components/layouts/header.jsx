@@ -6,15 +6,19 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { Link, useNavigate } from "@tanstack/react-location";
+import { Link, useLocation, useNavigate } from "@tanstack/react-location";
+import clsx from "clsx";
 import { useAtom } from "jotai";
 import { RESET } from "jotai/utils";
 
 import { userAtom } from "/src/stores/auth.store";
 
 export default function Header() {
-  // router
+  // location
   const navigate = useNavigate();
+  const {
+    current: { pathname },
+  } = useLocation();
 
   // atom
   const [user, setUser] = useAtom(userAtom);
@@ -24,11 +28,17 @@ export default function Header() {
     navigate({ to: "/login" });
   };
 
+  const isAdminPage = pathname.startsWith("/admin");
+
   return (
-    <nav className="bg-base-300">
-      <div className="container navbar flex-col sm:flex-row">
+    <nav
+      className={clsx("shadow-md", {
+        "bg-error": isAdminPage,
+      })}
+    >
+      <div className="container navbar flex-wrap">
         {/* start */}
-        <div>
+        <div className="mr-auto">
           <Link to="/" className="btn btn-ghost">
             <CpuChipIcon className="h-8 w-8" />
             <span className="text-xl font-bold">
@@ -41,7 +51,7 @@ export default function Header() {
             Home
           </Link>
           {user.role === "admin" && (
-            <Link to="/admin" className="btn btn-ghost gap-1">
+            <Link to="/admin/courses" className="btn btn-ghost gap-1">
               <AdjustmentsVerticalIcon className="h-5 w-5" />
               Admin Dashboard
             </Link>

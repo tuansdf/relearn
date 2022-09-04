@@ -20,8 +20,8 @@ export default function UserCourseDetail() {
   );
 
   return (
-    <div className="grid gap-8 lg:grid-cols-3">
-      <div className="col-span-1 space-y-8 lg:order-last lg:space-y-16">
+    <div className="grid gap-8 xl:grid-cols-3">
+      <div className="col-span-1 space-y-8 xl:order-last xl:space-y-16">
         {/* test */}
         <div className="space-y-4">
           <h2 className="text-2xl font-bold lg:text-3xl">Test</h2>
@@ -47,7 +47,7 @@ export default function UserCourseDetail() {
       </div>
 
       {/* lessons */}
-      <div className="col-span-2 space-y-4 lg:order-first">
+      <div className="col-span-2 space-y-4 lg:space-y-8 xl:order-first">
         <h2 className="text-2xl font-bold lg:text-3xl">Lessons</h2>
         {lessonsQuery.isLoading ? (
           <Loading />

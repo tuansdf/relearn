@@ -1,6 +1,7 @@
 export const QueryKeys = Object.freeze({
   USER: "user",
   COURSES: "courses",
+  COURSE: "course",
   LESSONS: "lessons",
   QUESTIONS: "questions",
   LESSONS_BY_COURSE: "lessons-by-course",
