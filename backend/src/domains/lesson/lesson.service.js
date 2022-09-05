@@ -39,4 +39,18 @@ const create = async ({ title, description, courseId }) => {
   return lesson;
 };
 
-module.exports = { findAll, findOne, create, findAllByCourse };
+const update = async ({ title, description, lessonId }) => {
+  const lesson = await Lesson.findOneAndUpdate(
+    { _id: lessonId },
+    { title, description },
+    { new: true }
+  );
+
+  if (!lesson) {
+    throw new createHttpError.NotFound("Lesson not found");
+  }
+
+  return lesson;
+};
+
+module.exports = { findAll, findOne, create, findAllByCourse, update };
