@@ -38,7 +38,7 @@ export default function Header() {
     >
       <div className="container navbar flex-wrap">
         {/* start */}
-        <div className="mr-auto">
+        <div className="mr-auto flex flex-wrap">
           <Link to="/" className="btn btn-ghost">
             <CpuChipIcon className="h-8 w-8" />
             <span className="text-xl font-bold">
@@ -61,7 +61,7 @@ export default function Header() {
         {/* end */}
         <div className="ml-auto">
           {Object.keys(user).length > 0 ? (
-            <div className="dropdown-end dropdown">
+            <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost">
                 <AtSymbolIcon className="h-5 w-5" />
                 {user.username}

@@ -3,17 +3,17 @@ import { Link } from "@tanstack/react-location";
 import clsx from "clsx";
 import { useState } from "react";
 
-import UpdateCourseForm from "/src/components/course/update-course-form";
+import UpdateLessonForm from "/src/components/lesson/update-lesson-form";
 
-export default function CourseTable({ courses }) {
+export default function LessonTable({ lessons }) {
   const [isUpdateModal, setIsUpdateModal] = useState(false);
   const [selectedId, setSelectedId] = useState(0);
 
   const openUpdateModal = () => setIsUpdateModal(true);
   const closeUpdateModal = () => setIsUpdateModal(false);
-  const editCourse = (courseId) => {
+  const editLesson = (lessonId) => {
     openUpdateModal();
-    setSelectedId(courseId);
+    setSelectedId(lessonId);
   };
 
   return (
@@ -30,25 +30,25 @@ export default function CourseTable({ courses }) {
           </thead>
 
           <tbody>
-            {courses.map((course, index) => (
-              <tr key={course._id}>
+            {lessons.map((lesson, index) => (
+              <tr key={lesson._id}>
                 <th>{index + 1}</th>
                 <td className="space-x-2">
                   <button
                     className="btn btn-ghost btn-sm"
-                    onClick={() => editCourse(index)}
+                    onClick={() => editLesson(index)}
                   >
                     Edit
                   </button>
                   <Link
-                    to={`/admin/courses/${course._id}/lessons`}
+                    to={`/admin/lessons/${lesson._id}/questions`}
                     className="btn btn-ghost btn-sm"
                   >
-                    Lessons
+                    Questions
                   </Link>
                 </td>
-                <td>{course.title}</td>
-                <td>{course.description}</td>
+                <td>{lesson.title}</td>
+                <td>{lesson.description}</td>
               </tr>
             ))}
           </tbody>
@@ -60,8 +60,8 @@ export default function CourseTable({ courses }) {
         <div className={clsx("modal", { "modal-open": isUpdateModal })}>
           <div className="modal-box">
             {isUpdateModal && (
-              <UpdateCourseForm
-                course={courses[selectedId]}
+              <UpdateLessonForm
+                lesson={lessons[selectedId]}
                 onSuccess={closeUpdateModal}
               />
             )}

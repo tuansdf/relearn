@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-base-300">
+    <footer className="">
       <div className="container footer p-8">
         <div>
           <span className="footer-title">RELEARN</span>

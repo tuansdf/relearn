@@ -4,8 +4,8 @@ import clsx from "clsx";
 import { useState } from "react";
 import { useQuery } from "react-query";
 
-import CourseTable from "/src/components/course/course-table";
-import CreateCourseForm from "/src/components/course/create-course-form";
+import CreateLessonForm from "/src/components/lesson/create-lesson-form";
+import LessonTable from "/src/components/lesson/lesson-table";
 import Error from "/src/components/shared/error";
 import Loading from "/src/components/shared/loading";
 
@@ -40,14 +40,14 @@ export default function AdminLessons() {
       ) : lessonsQuery.isError ? (
         <Error text={lessonsQuery.error.response.data.message} />
       ) : (
-        <CourseTable courses={lessonsQuery.data} />
+        <LessonTable lessons={lessonsQuery.data} />
       )}
 
       {/* create modal */}
       <div>
         <div className={clsx("modal", { "modal-open": isCreateModal })}>
           <div className="modal-box">
-            {isCreateModal && <CreateCourseForm onSuccess={closeCreateModal} />}
+            {isCreateModal && <CreateLessonForm onSuccess={closeCreateModal} />}
             <button
               onClick={closeCreateModal}
               className="btn btn-circle absolute top-0 right-0 m-4"

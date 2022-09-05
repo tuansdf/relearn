@@ -44,6 +44,14 @@ export const getLessonsByCourseApi = async (courseId) => {
   return (await instance.get(`/courses/${courseId}/lessons`)).data;
 };
 
+export const patchLessonApi = async (lessonId, data) => {
+  return (await instance.patch(`/lessons/${lessonId}`, data)).data;
+};
+
+export const postLessonInCourseApi = async (courseId, data) => {
+  return (await instance.post(`/courses/${courseId}/lessons`, data)).data;
+};
+
 // question
 export const getQuestionsApi = async () => {
   return (await instance.get("/questions")).data;
