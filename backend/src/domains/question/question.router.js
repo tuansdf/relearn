@@ -25,4 +25,10 @@ router.post("/:questionId/comments", async (req, res) => {
   res.json(await commentService.create({ ...req.body, questionId }));
 });
 
+router.patch("/:questionId", async (req, res) => {
+  const { questionId } = req.params;
+
+  res.json(await questionService.update({ ...req.body, questionId }));
+});
+
 module.exports = router;

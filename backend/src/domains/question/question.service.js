@@ -55,4 +55,25 @@ const create = async ({ text, description, answers, lessonId }) => {
   return question;
 };
 
-module.exports = { findAll, findOne, create, findAllByCourse, findAllByLesson };
+const update = async ({ text, description, questionId }) => {
+  const question = await Question.findOneAndUpdate(
+    { _id: questionId },
+    { text, description },
+    { new: true }
+  );
+
+  if (!question) {
+    throw new createHttpError.NotFound("Question not found");
+  }
+
+  return question;
+};
+
+module.exports = {
+  findAll,
+  findOne,
+  create,
+  findAllByCourse,
+  findAllByLesson,
+  update,
+};

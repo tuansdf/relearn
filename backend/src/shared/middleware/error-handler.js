@@ -35,6 +35,5 @@ module.exports = (err, req, res, next) => {
   res.status(err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR).json({
     statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
     message: err.message || "Something went wrong. Try again later.",
-    err,
   });
 };
