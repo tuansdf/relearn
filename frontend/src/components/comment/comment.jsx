@@ -7,7 +7,7 @@ import { getUserApi } from "/src/helpers/fetchers";
 
 dayjs.extend(relativeTime);
 
-export default function CommentBox({ comment }) {
+export default function Comment({ comment }) {
   // query
   const userQuery = useQuery([QueryKeys.USER, comment.author], () =>
     getUserApi(comment.author)

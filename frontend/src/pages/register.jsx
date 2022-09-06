@@ -85,7 +85,7 @@ export default function Register() {
         </div>
 
         {registerMutation.isError && (
-          <Error text={registerMutation.error.response.data.message} />
+          <Error text={registerMutation.error.response.data?.message} />
         )}
       </form>
     </div>

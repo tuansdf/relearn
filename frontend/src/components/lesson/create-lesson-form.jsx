@@ -40,10 +40,7 @@ export default function CreateLessonForm({ onSuccess }) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="max-w-screen-md space-y-4"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <h2 className="card-title text-2xl">Create a lesson</h2>
 
       <div className="form-control">
@@ -71,7 +68,7 @@ export default function CreateLessonForm({ onSuccess }) {
       </div>
 
       <button
-        className={clsx("btn btn-primary mt-4", {
+        className={clsx("btn btn-primary", {
           loading: lessonMutation.isLoading,
         })}
       >

@@ -74,7 +74,7 @@ export default function Login() {
         </div>
 
         {loginMutation.isError && (
-          <Error text={loginMutation.error.response.data.message} />
+          <Error text={loginMutation.error.response.data?.message} />
         )}
       </form>
     </div>

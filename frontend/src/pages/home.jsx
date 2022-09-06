@@ -14,10 +14,11 @@ export default function Home() {
   return (
     <div className="space-y-4 lg:space-y-8">
       <h2 className="text-2xl font-bold lg:text-3xl">Courses</h2>
+
       {coursesQuery.isLoading ? (
         <Loading />
       ) : coursesQuery.isError ? (
-        <Error text={coursesQuery.error.response.data.message} />
+        <Error text={coursesQuery.error.response.data?.message} />
       ) : (
         <CourseCardList courses={coursesQuery.data} />
       )}

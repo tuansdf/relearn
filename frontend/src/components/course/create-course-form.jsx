@@ -62,7 +62,7 @@ export default function CreateCourseForm({ onSuccess }) {
       </div>
 
       <button
-        className={clsx("btn btn-primary mt-4", {
+        className={clsx("btn btn-primary", {
           loading: courseMutation.isLoading,
         })}
       >

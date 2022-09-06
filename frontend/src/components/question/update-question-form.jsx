@@ -1,3 +1,4 @@
+import { useMatch } from "@tanstack/react-location";
 import clsx from "clsx";
 import { useId } from "react";
 import { useForm } from "react-hook-form";
@@ -6,49 +7,57 @@ import { useMutation, useQueryClient } from "react-query";
 import Success from "/src/components/shared/success";
 
 import { QueryKeys } from "/src/constants/query-keys";
-import { patchCourseApi } from "/src/helpers/fetchers";
+import { patchQuestionApi } from "/src/helpers/fetchers";
 
-export default function UpdateCourseForm({ course, onSuccess }) {
-  const titleId = useId();
+export default function UpdateQuestionForm({ question, onSuccess }) {
+  const textId = useId();
   const descriptionId = useId();
+
+  //   location
+  const {
+    params: { lessonId },
+  } = useMatch();
 
   // form
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      title: course.title,
-      description: course.description,
+      text: question.text,
+      description: question.description,
     },
   });
 
   // query
   const queryClient = useQueryClient();
 
-  const courseMutation = useMutation(
-    (data) => patchCourseApi(course._id, data),
+  const questionMutation = useMutation(
+    (data) => patchQuestionApi(question._id, data),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([QueryKeys.COURSES]);
+        queryClient.invalidateQueries([
+          QueryKeys.QUESTIONS_BY_LESSON,
+          lessonId,
+        ]);
         onSuccess();
       },
     }
   );
 
   const onSubmit = (data) => {
-    courseMutation.mutate(data);
+    questionMutation.mutate(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h2 className="card-title text-2xl">Update course</h2>
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-0">
+      <h2 className="card-title text-2xl">Update lesson</h2>
       <div className="form-control">
-        <label htmlFor={titleId} className="label">
+        <label htmlFor={textId} className="label">
           <span className="label-text">Title</span>
         </label>
         <input
           type="text"
-          id={titleId}
+          id={textId}
           className="input input-bordered"
-          {...register("title", { required: true })}
+          {...register("text", { required: true })}
         />
       </div>
       <div className="form-control">
@@ -64,15 +73,15 @@ export default function UpdateCourseForm({ course, onSuccess }) {
       </div>
 
       <button
-        className={clsx("btn btn-primary rounded", {
-          loading: courseMutation.isLoading,
+        className={clsx("btn btn-primary mt-4 rounded", {
+          loading: questionMutation.isLoading,
         })}
       >
         Update
       </button>
 
-      {courseMutation.isSuccess && (
-        <Success text="Course updated successfully!" />
+      {questionMutation.isSuccess && (
+        <Success text="Lesson updated successfully!" />
       )}
     </form>
   );

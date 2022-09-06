@@ -3,14 +3,12 @@ import { useAtom } from "jotai";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 
-import CommentBox from "/src/components/comment/comment-box";
-import Info from "/src/components/shared/info";
 import { QueryKeys } from "/src/constants/query-keys";
 
 import { postCommentInQuestionApi } from "/src/helpers/fetchers";
 import { userAtom } from "/src/stores/auth.store";
 
-export default function CommentBoxList({ comments }) {
+export default function CommentForm() {
   // location
   const {
     params: { questionId },
@@ -43,22 +41,13 @@ export default function CommentBoxList({ comments }) {
   };
 
   return (
-    <div className="space-y-4">
-      <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          placeholder="Add a comment..."
-          className="input input-bordered w-full"
-          {...register("text", { required: true })}
-        />
-      </form>
-      {comments.length > 0 ? (
-        comments.map((comment) => (
-          <CommentBox comment={comment} key={comment._id} />
-        ))
-      ) : (
-        <Info text="No comment" />
-      )}
-    </div>
+    <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+      <input
+        type="text"
+        placeholder="Add a comment..."
+        className="input input-bordered w-full"
+        {...register("text", { required: true })}
+      />
+    </form>
   );
 }

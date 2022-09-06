@@ -1,9 +1,7 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "@tanstack/react-location";
-import clsx from "clsx";
 import { useState } from "react";
 
-import UpdateLessonForm from "/src/components/lesson/update-lesson-form";
+import UpdateLessonModal from "/src/components/lesson/update-lesson-modal";
 
 export default function LessonTable({ lessons }) {
   const [isUpdateModal, setIsUpdateModal] = useState(false);
@@ -19,7 +17,7 @@ export default function LessonTable({ lessons }) {
   return (
     <>
       <div className="overflow-x-auto">
-        <table className="table-zebra table">
+        <table className="table-zebra table w-full">
           <thead>
             <tr>
               <th />
@@ -56,24 +54,11 @@ export default function LessonTable({ lessons }) {
       </div>
 
       {/* update modal */}
-      <div>
-        <div className={clsx("modal", { "modal-open": isUpdateModal })}>
-          <div className="modal-box">
-            {isUpdateModal && (
-              <UpdateLessonForm
-                lesson={lessons[selectedId]}
-                onSuccess={closeUpdateModal}
-              />
-            )}
-            <button
-              onClick={closeUpdateModal}
-              className="btn btn-circle absolute top-0 right-0 m-4"
-            >
-              <XMarkIcon className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <UpdateLessonModal
+        isModal={isUpdateModal}
+        closeModal={closeUpdateModal}
+        lesson={lessons[selectedId]}
+      />
     </>
   );
 }

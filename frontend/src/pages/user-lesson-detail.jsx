@@ -26,7 +26,7 @@ export default function UserLessonDetail() {
       {questionsQuery.isLoading ? (
         <Loading />
       ) : questionsQuery.isError ? (
-        <Error text={questionsQuery.error.response.data.message} />
+        <Error text={questionsQuery.error.response.data?.message} />
       ) : (
         <QuestionList questions={questionsQuery.data} />
       )}

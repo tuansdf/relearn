@@ -1,24 +1,25 @@
 import { useMatch } from "@tanstack/react-location";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import CreateLessonModal from "/src/components/lesson/create-lesson-modal";
+import CreateQuestionModal from "/src/components/question/create-question-modal";
 
-import LessonTable from "/src/components/lesson/lesson-table";
+import QuestionTable from "/src/components/question/question-table";
 import Error from "/src/components/shared/error";
 import Loading from "/src/components/shared/loading";
 
 import { QueryKeys } from "/src/constants/query-keys";
-import { getLessonsByCourseApi } from "/src/helpers/fetchers";
+import { getQuestionsByLessonApi } from "/src/helpers/fetchers";
 
-export default function AdminLessons() {
+export default function AdminQuestions() {
   // location
   const {
-    params: { courseId },
+    params: { lessonId },
   } = useMatch();
 
   // query
-  const lessonsQuery = useQuery([QueryKeys.LESSONS_BY_COURSE, courseId], () =>
-    getLessonsByCourseApi(courseId)
+  const questionsQuery = useQuery(
+    [QueryKeys.QUESTIONS_BY_LESSON, lessonId],
+    () => getQuestionsByLessonApi(lessonId)
   );
 
   const [isCreateModal, setIsCreateModal] = useState(false);
@@ -34,23 +35,23 @@ export default function AdminLessons() {
         >
           Back
         </button>
-        <h2 className="text-2xl font-bold lg:text-3xl">Lessons</h2>
+        <h2 className="text-2xl font-bold lg:text-3xl">Questions</h2>
       </div>
 
       <button className="btn" onClick={openCreateModal}>
-        Create lesson
+        Create question
       </button>
 
-      {lessonsQuery.isLoading ? (
+      {questionsQuery.isLoading ? (
         <Loading />
-      ) : lessonsQuery.isError ? (
-        <Error text={lessonsQuery.error.response.data?.message} />
+      ) : questionsQuery.isError ? (
+        <Error text={questionsQuery.error.response.data?.message} />
       ) : (
-        <LessonTable lessons={lessonsQuery.data} />
+        <QuestionTable questions={questionsQuery.data} />
       )}
 
       {/* create modal */}
-      <CreateLessonModal
+      <CreateQuestionModal
         isModal={isCreateModal}
         closeModal={closeCreateModal}
       />

@@ -1,10 +1,8 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
 import { useState } from "react";
 import { useQuery } from "react-query";
 
 import CourseTable from "/src/components/course/course-table";
-import CreateCourseForm from "/src/components/course/create-course-form";
+import CreateCourseModal from "/src/components/course/create-course-modal";
 import Error from "/src/components/shared/error";
 import Loading from "/src/components/shared/loading";
 
@@ -30,25 +28,16 @@ export default function AdminCourses() {
       {coursesQuery.isLoading ? (
         <Loading />
       ) : coursesQuery.isError ? (
-        <Error text={coursesQuery.error.response.data.message} />
+        <Error text={coursesQuery.error.response.data?.message} />
       ) : (
         <CourseTable courses={coursesQuery.data} />
       )}
 
       {/* create modal */}
-      <div>
-        <div className={clsx("modal", { "modal-open": isCreateModal })}>
-          <div className="modal-box">
-            {isCreateModal && <CreateCourseForm onSuccess={closeCreateModal} />}
-            <button
-              onClick={closeCreateModal}
-              className="btn btn-circle absolute top-0 right-0 m-4"
-            >
-              <XMarkIcon className="h-6 w-6" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <CreateCourseModal
+        isModal={isCreateModal}
+        closeModal={closeCreateModal}
+      />
     </div>
   );
 }

@@ -1,17 +1,16 @@
-import { Link } from "@tanstack/react-location";
 import { useState } from "react";
 
-import UpdateCourseModal from "/src/components/course/update-course-modal";
+import UpdateQuestionModal from "/src/components/question/update-question-modal";
 
-export default function CourseTable({ courses }) {
+export default function QuestionTable({ questions }) {
   const [isUpdateModal, setIsUpdateModal] = useState(false);
   const [selectedId, setSelectedId] = useState(0);
 
   const openUpdateModal = () => setIsUpdateModal(true);
   const closeUpdateModal = () => setIsUpdateModal(false);
-  const editCourse = (courseId) => {
+  const editQuestion = (questionId) => {
     openUpdateModal();
-    setSelectedId(courseId);
+    setSelectedId(questionId);
   };
 
   return (
@@ -22,31 +21,33 @@ export default function CourseTable({ courses }) {
             <tr>
               <th />
               <th>Actions</th>
-              <th>Title</th>
+              <th>Question</th>
               <th>Description</th>
+              <th>Answers</th>
             </tr>
           </thead>
 
           <tbody>
-            {courses.map((course, index) => (
-              <tr key={course._id}>
+            {questions.map((question, index) => (
+              <tr key={question._id}>
                 <th>{index + 1}</th>
                 <td className="space-x-2">
                   <button
                     className="btn btn-ghost btn-sm"
-                    onClick={() => editCourse(index)}
+                    onClick={() => editQuestion(index)}
                   >
                     Edit
                   </button>
-                  <Link
-                    to={`/admin/courses/${course._id}/lessons`}
-                    className="btn btn-ghost btn-sm"
-                  >
-                    Lessons
-                  </Link>
                 </td>
-                <td>{course.title}</td>
-                <td>{course.description}</td>
+                <td>{question.text}</td>
+                <td>{question.description}</td>
+                <td>
+                  {question.answers.map((answer) => (
+                    <p>
+                      {answer.isCorrect ? "+" : "-"} {answer.text}
+                    </p>
+                  ))}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -54,10 +55,10 @@ export default function CourseTable({ courses }) {
       </div>
 
       {/* update modal */}
-      <UpdateCourseModal
+      <UpdateQuestionModal
         isModal={isUpdateModal}
         closeModal={closeUpdateModal}
-        course={courses[selectedId]}
+        question={questions[selectedId]}
       />
     </>
   );
