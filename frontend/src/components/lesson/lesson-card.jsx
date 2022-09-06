@@ -6,8 +6,8 @@ export default function LessonCard({ lesson }) {
       <div className="card-body">
         <h3 className="card-title">{lesson.title}</h3>
 
-        <div className="relative flex-1">
-          <p className="absolute inset-0 overflow-hidden">
+        <div className="xl:relative xl:flex-1">
+          <p className="xl:absolute xl:inset-0 xl:overflow-hidden">
             {lesson.description}
           </p>
         </div>

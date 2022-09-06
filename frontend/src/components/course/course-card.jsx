@@ -6,8 +6,8 @@ export default function CourseCard({ course }) {
       <div className="card-body">
         <h3 className="card-title">{course.title}</h3>
 
-        <div className="relative flex-1">
-          <p className="absolute inset-0 overflow-hidden">
+        <div className="lg:relative lg:flex-1">
+          <p className="lg:absolute lg:inset-0 lg:overflow-hidden">
             {course.description}
           </p>
         </div>
