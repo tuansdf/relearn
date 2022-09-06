@@ -20,10 +20,10 @@ export default function QuestionList({ questions }) {
   const mark = useMemo(() => {
     const totalQ = questions.length;
     const percentage = score / totalQ;
-    if (percentage > 0.8) return "HD";
-    if (percentage > 0.7) return "DI";
-    if (percentage > 0.6) return "CR";
-    if (percentage > 0.5) return "PA";
+    if (percentage >= 0.8) return "HD";
+    if (percentage >= 0.7) return "DI";
+    if (percentage >= 0.6) return "CR";
+    if (percentage >= 0.5) return "PA";
     return "NN";
   }, [score]);
 
