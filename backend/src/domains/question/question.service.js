@@ -55,10 +55,10 @@ const create = async ({ text, description, answers, lessonId }) => {
   return question;
 };
 
-const update = async ({ text, description, questionId }) => {
+const update = async ({ text, description, answers, questionId }) => {
   const question = await Question.findOneAndUpdate(
     { _id: questionId },
-    { text, description },
+    { text, description, answers },
     { new: true }
   );
 

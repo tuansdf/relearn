@@ -43,7 +43,7 @@ export default function QuestionTable({ questions }) {
                 <td>{question.description}</td>
                 <td>
                   {question.answers.map((answer) => (
-                    <p>
+                    <p key={answer._id}>
                       {answer.isCorrect ? "+" : "-"} {answer.text}
                     </p>
                   ))}

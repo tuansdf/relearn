@@ -15,9 +15,6 @@ const FormKeys = Object.freeze({
   DESCRIPTION: "description",
   ANSWERS: "answers",
   IS_CORRECT: "isCorrect",
-  ANSWER_TEXT: "answertext",
-  ANSWER_CORRECT: "answercorrect",
-  ANSWER_SPLITTER: "-",
 });
 
 export default function CreateQuestionForm({ onSuccess }) {
@@ -97,12 +94,12 @@ export default function CreateQuestionForm({ onSuccess }) {
       {/* answers */}
       <div className="form-control">
         <label className="label">
-          <span className="label-text">Answer - True/False</span>
+          <span className="label-text">Answers - True/False</span>
         </label>
 
         <ul className="space-y-2">
           {fields.map((answer, index) => (
-            <li className="flex items-center gap-2" key={index}>
+            <li className="flex items-center gap-2" key={answer.id}>
               <input
                 type="text"
                 className="input input-bordered w-full"
