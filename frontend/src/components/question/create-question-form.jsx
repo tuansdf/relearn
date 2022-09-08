@@ -1,7 +1,8 @@
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useMatch } from "@tanstack/react-location";
 import clsx from "clsx";
-import { useId, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useId } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 
 import Success from "/src/components/shared/success";
@@ -29,7 +30,11 @@ export default function CreateQuestionForm({ onSuccess }) {
   } = useMatch();
 
   // form
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, control } = useForm();
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: FormKeys.ANSWERS,
+  });
 
   // query
   const queryClient = useQueryClient();
@@ -48,29 +53,16 @@ export default function CreateQuestionForm({ onSuccess }) {
     }
   );
 
-  const [answerCount, setAnswerCount] = useState(1);
-
   const onSubmit = (data) => {
-    const newData = {
-      [FormKeys.TEXT]: data[FormKeys.TEXT],
-      [FormKeys.DESCRIPTION]: data[FormKeys.DESCRIPTION],
-      [FormKeys.ANSWERS]: [],
-    };
-
-    for (let i = 0; i < answerCount; i++) {
-      const answerTextKey = `${FormKeys.ANSWER_TEXT}${FormKeys.ANSWER_SPLITTER}${i}`;
-      const answerCorrectKey = `${FormKeys.ANSWER_CORRECT}${FormKeys.ANSWER_SPLITTER}${i}`;
-
-      newData[FormKeys.ANSWERS].push({
-        [FormKeys.TEXT]: data[answerTextKey],
-        [FormKeys.IS_CORRECT]: data[answerCorrectKey],
-      });
-    }
-
-    questionMutation.mutate(newData);
+    questionMutation.mutate(data);
   };
 
-  const increaseAnswerCount = () => setAnswerCount((prev) => prev + 1);
+  const addAnswerField = () => {
+    append({ [FormKeys.TEXT]: "", [FormKeys.IS_CORRECT]: false });
+  };
+  const removeAnswerField = (index) => {
+    remove(index);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
@@ -108,38 +100,42 @@ export default function CreateQuestionForm({ onSuccess }) {
           <span className="label-text">Answer - True/False</span>
         </label>
 
-        <div className="space-y-2">
-          {[...Array(answerCount)].map((_, index) => (
-            <div className="flex items-center gap-2">
+        <ul className="space-y-2">
+          {fields.map((answer, index) => (
+            <li className="flex items-center gap-2" key={index}>
               <input
                 type="text"
-                key={index}
                 className="input input-bordered w-full"
-                {...register(
-                  `${FormKeys.ANSWER_TEXT}${FormKeys.ANSWER_SPLITTER}${index}`,
-                  {
-                    required: true,
-                  }
-                )}
+                {...register(`${FormKeys.ANSWERS}.${index}.${FormKeys.TEXT}`, {
+                  required: true,
+                })}
               />
               <input
                 type="checkbox"
                 {...register(
-                  `${FormKeys.ANSWER_CORRECT}${FormKeys.ANSWER_SPLITTER}${index}`
+                  `${FormKeys.ANSWERS}.${index}.${FormKeys.IS_CORRECT}`
                 )}
                 className="checkbox"
               />
-            </div>
+
+              <button
+                onClick={() => removeAnswerField(index)}
+                type="button"
+                className="btn btn-square"
+              >
+                <XMarkIcon className="h-6 w-6" />{" "}
+              </button>
+            </li>
           ))}
 
           <button
             type="button"
-            onClick={increaseAnswerCount}
+            onClick={addAnswerField}
             className="btn btn-block"
           >
             Add Question
           </button>
-        </div>
+        </ul>
       </div>
 
       {/* submit */}

@@ -1,4 +1,4 @@
-import { ReactLocation, Router } from "@tanstack/react-location";
+import { Outlet, ReactLocation, Router } from "@tanstack/react-location";
 import { Provider } from "jotai";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -31,7 +31,11 @@ const routes = [
       },
       {
         path: "/user/",
-        element: <UserInfo />,
+        element: (
+          <CheckLogin>
+            <UserInfo />
+          </CheckLogin>
+        ),
       },
       {
         path: "/login/",
@@ -80,6 +84,11 @@ const routes = [
       },
       {
         path: "/admin",
+        element: (
+          <CheckLogin>
+            <Outlet />
+          </CheckLogin>
+        ),
         children: [
           {
             path: "/courses",
