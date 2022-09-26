@@ -1,0 +1,21 @@
+GET {{baseUrl}}/test-results HTTP/1.1
+
+###
+
+GET {{baseUrl}}/courses/{{courseId}}/test-results HTTP/1.1
+
+###
+
+GET {{baseUrl}}/test-results/{{testResultId}} HTTP/1.1
+
+###
+
+POST {{baseUrl}}/test-results HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "userId": "{{userId}}",
+    "courseId": "{{courseId}}",
+    "score": 10
+}

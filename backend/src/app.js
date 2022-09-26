@@ -16,6 +16,7 @@ const commentRouter = require("./domains/comment/comment.router");
 const courseRouter = require("./domains/course/course.router");
 const lessonRouter = require("./domains/lesson/lesson.router");
 const questionRouter = require("./domains/question/question.router");
+const testResultRouter = require("./domains/test-result/test-result.router");
 
 // errors
 const errorHandler = require("./shared/middleware/error-handler");
@@ -40,6 +41,7 @@ app.use(prefix + "/comments", commentRouter);
 app.use(prefix + "/courses", courseRouter);
 app.use(prefix + "/lessons", lessonRouter);
 app.use(prefix + "/questions", questionRouter);
+app.use(prefix + "/test-results", testResultRouter);
 
 // errors
 app.use(notFound);
