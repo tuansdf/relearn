@@ -10,6 +10,7 @@ import { Link, useLocation, useNavigate } from "@tanstack/react-location";
 import clsx from "clsx";
 import { useAtom } from "jotai";
 import { RESET } from "jotai/utils";
+import { isEmpty } from "lodash-es";
 
 import { userAtom } from "/src/stores/auth.store";
 
@@ -60,7 +61,7 @@ export default function Header() {
 
         {/* end */}
         <div className="ml-auto">
-          {Object.keys(user).length > 0 ? (
+          {!isEmpty(user) ? (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost">
                 <AtSymbolIcon className="h-5 w-5" />

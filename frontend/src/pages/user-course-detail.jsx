@@ -34,18 +34,23 @@ export default function UserCourseDetail() {
         <div className="space-y-4">
           <h2 className="text-2xl font-bold lg:text-3xl">Ranking</h2>
           <p>See your position in the leaderboard</p>
-          <Link className="btn">Ranking</Link>
-        </div>
-        {/* profile */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold lg:text-3xl">Lecture's profile</h2>
-          <p>See information about your lecturer</p>
-          <Link className="btn">Go to Profile</Link>
+          <Link to={`/courses/${courseId}/leaderboard`} className="btn">
+            Ranking
+          </Link>
         </div>
       </div>
       {/* lessons */}
       <div className="col-span-2 space-y-4 lg:space-y-8 xl:order-first">
-        <h2 className="text-2xl font-bold lg:text-3xl">Lessons</h2>
+        <div className="flex items-center gap-2 lg:gap-4">
+          <button
+            className="btn btn-primary"
+            onClick={() => window.history.back()}
+          >
+            Back
+          </button>
+          <h2 className="text-2xl font-bold lg:text-3xl">Lessons</h2>
+        </div>
+
         {lessonsQuery.isLoading ? (
           <Loading />
         ) : lessonsQuery.isError ? (

@@ -9,6 +9,7 @@ import Error from "/src/components/shared/error";
 import AdminCourses from "/src/pages/admin-courses";
 import AdminLessons from "/src/pages/admin-lessons";
 import AdminQuestions from "/src/pages/admin-questions";
+import CourseLeaderboard from "/src/pages/course-leaderboard";
 import Home from "/src/pages/home";
 import Login from "/src/pages/login";
 import Register from "/src/pages/register";
@@ -62,7 +63,15 @@ const routes = [
           },
           {
             path: "/test/",
-            element: <UserCourseTest />,
+            element: (
+              <CheckLogin>
+                <UserCourseTest />
+              </CheckLogin>
+            ),
+          },
+          {
+            path: "/leaderboard/",
+            element: <CourseLeaderboard />,
           },
         ],
       },

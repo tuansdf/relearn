@@ -28,7 +28,7 @@ export default function UserCourseTest() {
       ) : questionsQuery.isError ? (
         <Error text={questionsQuery.error.response.data?.message} />
       ) : (
-        <QuestionList questions={questionsQuery.data} />
+        <QuestionList questions={questionsQuery.data} isMarking />
       )}
     </div>
   );

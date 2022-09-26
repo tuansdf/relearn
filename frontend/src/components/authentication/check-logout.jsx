@@ -7,5 +7,5 @@ export default function CheckLogout({ children }) {
   // atom
   const [user] = useAtom(userAtom);
 
-  return user?.token ? <Navigate to="/" /> : children;
+  return user?.token ? <Navigate to="/" replace /> : children;
 }
